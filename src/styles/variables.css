@@ -1,0 +1,51 @@
+:root {
+  /* Brand — derivado del logo ABC Matafuegos */
+  --color-fire: #ed1c24;
+  --color-fire-dark: #c1121a;
+  --color-fire-soft: #fdeaea;
+
+  /* Neutrals */
+  --color-ink: #111418;
+  --color-graphite: #1c2128;
+  --color-slate: #6b7280;
+  --color-muted: #9aa2ad;
+  --color-line: #e6e8ec;
+  --color-bg: #ffffff;
+  --color-bg-soft: #f5f6f8;
+
+  /* Semantic */
+  --color-safe: #1fa15a;
+  --color-safe-soft: #e5f5ec;
+  --color-warn: #f5a524;
+  --color-warn-soft: #fef3df;
+
+  /* Typography */
+  --font-display: "Sora", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --fs-hero: clamp(2.4rem, 5vw, 4rem);
+  --fs-h2: clamp(1.9rem, 3.5vw, 2.75rem);
+  --fs-h3: clamp(1.25rem, 2vw, 1.6rem);
+  --fs-lead: clamp(1.05rem, 1.4vw, 1.25rem);
+
+  /* Spacing & radius */
+  --section-py: clamp(4rem, 8vw, 7rem);
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 24px;
+
+  /* Elevation */
+  --shadow-sm: 0 2px 8px rgba(17, 20, 24, 0.06);
+  --shadow-md: 0 12px 30px rgba(17, 20, 24, 0.1);
+  --shadow-lg: 0 24px 60px rgba(17, 20, 24, 0.14);
+  --shadow-fire: 0 14px 34px rgba(237, 28, 36, 0.28);
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition: 0.28s var(--ease);
+
+  /* Bootstrap overrides */
+  --bs-primary: #ed1c24;
+  --bs-body-font-family: var(--font-body);
+  --bs-body-color: var(--color-ink);
+}
