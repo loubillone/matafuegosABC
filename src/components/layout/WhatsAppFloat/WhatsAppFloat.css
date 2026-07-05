@@ -1,0 +1,42 @@
+.wa-float {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 999px;
+  background: #25d366;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.4);
+  animation: pulse-ring 2.4s infinite;
+  transition: transform var(--transition);
+}
+
+.wa-float:hover {
+  color: #fff;
+  transform: translateY(-3px) scale(1.03);
+}
+
+.wa-float svg {
+  font-size: 1.5rem;
+}
+
+.wa-float__label {
+  font-size: 0.95rem;
+}
+
+@media (max-width: 575px) {
+  .wa-float__label {
+    display: none;
+  }
+
+  .wa-float {
+    padding: 0.9rem;
+  }
+}

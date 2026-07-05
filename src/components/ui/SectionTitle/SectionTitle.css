@@ -1,0 +1,23 @@
+.section-title {
+  max-width: 720px;
+  margin-bottom: 3rem;
+}
+
+.section-title--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-title--left {
+  text-align: left;
+}
+
+.section-title__heading {
+  font-size: var(--fs-h2);
+  margin: 0.75rem 0 0;
+  color: var(--color-ink);
+}
+
+.section-title__subtitle {
+  margin: 1rem 0 0;
+}

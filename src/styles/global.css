@@ -1,0 +1,134 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Layout helpers */
+.section {
+  padding-block: var(--section-py);
+}
+
+.section-soft {
+  background-color: var(--color-bg-soft);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-fire);
+}
+
+.text-slate {
+  color: var(--color-slate);
+}
+
+.lead-text {
+  font-size: var(--fs-lead);
+  color: var(--color-slate);
+  line-height: 1.6;
+}
+
+/* Buttons */
+.btn {
+  --bs-btn-font-family: var(--font-display);
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.72rem 1.6rem;
+  transition: transform var(--transition), box-shadow var(--transition),
+    background-color var(--transition);
+}
+
+.btn-fire {
+  background-color: var(--color-fire);
+  border: none;
+  color: #fff;
+  box-shadow: var(--shadow-fire);
+}
+
+.btn-fire:hover {
+  background-color: var(--color-fire-dark);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btn-outline-ink {
+  border: 1.5px solid var(--color-line);
+  color: var(--color-ink);
+  background: #fff;
+}
+
+.btn-outline-ink:hover {
+  border-color: var(--color-ink);
+  transform: translateY(-2px);
+}
+
+.btn-ghost-light {
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.btn-ghost-light:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Pill / badges */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: var(--color-bg-soft);
+  color: var(--color-slate);
+}
+
+.pill-safe {
+  background: var(--color-safe-soft);
+  color: var(--color-safe);
+}
