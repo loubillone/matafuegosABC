@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { FaWhatsapp, FaBars, FaTimes } from "react-icons/fa";
+import { FaTruck, FaBars, FaTimes } from "react-icons/fa";
 import { siteConfig, navLinks } from "../../../data/siteConfig";
-import { whatsappLink } from "../../../utils/whatsapp";
+import { useRetiro } from "../../../context/retiroContext";
 import logo from "../../../assets/images/logo_abc.jpeg";
 import "./Navbar.css";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { openRetiro } = useRetiro();
+
+  const handleRetiroClick = () => {
+    setOpen(false);
+    openRetiro();
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -45,25 +51,22 @@ function Navbar() {
               {link.label}
             </a>
           ))}
-          <a
-            href={whatsappLink()}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
             className="btn btn-fire nav__cta-mobile"
-            onClick={() => setOpen(false)}
+            onClick={handleRetiroClick}
           >
-            <FaWhatsapp /> Pedir presupuesto
-          </a>
+            <FaTruck /> Solicitar retiro
+          </button>
         </nav>
 
-        <a
-          href={whatsappLink()}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
           className="btn btn-fire nav__cta"
+          onClick={handleRetiroClick}
         >
-          <FaWhatsapp /> Pedir presupuesto
-        </a>
+          <FaTruck /> Solicitar retiro
+        </button>
 
         <button
           className="nav__toggle"

@@ -1,8 +1,15 @@
+import { useLocation } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import { whatsappLink } from "../../../utils/whatsapp";
 import "./WhatsAppFloat.css";
 
 function WhatsAppFloat() {
+  const { pathname } = useLocation();
+
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
+
   return (
     <a
       href={whatsappLink()}
