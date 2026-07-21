@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { FaTimes, FaTruck } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { API_URL } from "../config/api";
 import "./SolicitudRetiro.css";
 
 const initialForm = {
@@ -52,7 +53,7 @@ function SolicitudRetiroModal({ open, onClose }) {
     try {
       setEnviando(true);
 
-      const response = await fetch("http://localhost:3000/api/retiros", {
+      const response = await fetch(`${API_URL}/api/retiros`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

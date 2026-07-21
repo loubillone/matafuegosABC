@@ -9,6 +9,7 @@ import {
   getAuthJsonHeaders,
   handleUnauthorized,
 } from "../utils/adminAuth";
+import { API_URL } from "../config/api";
 import "./AdminRetiros.css";
 
 const ESTADOS = ["Pendiente", "En proceso", "Retirado", "Entregado"];
@@ -44,7 +45,7 @@ const AdminRetiros = () => {
   useEffect(() => {
     const obtenerRetiros = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/retiros", {
+        const response = await fetch(`${API_URL}/api/retiros`, {
           headers: getAuthHeaders(),
         });
 
@@ -70,7 +71,7 @@ const AdminRetiros = () => {
   useEffect(() => {
     const obtenerPlanillas = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/planillas", {
+        const response = await fetch(`${API_URL}/api/planillas`, {
           headers: getAuthHeaders(),
         });
 
@@ -124,7 +125,7 @@ const AdminRetiros = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/retiros/${id}/estado`,
+        `${API_URL}/api/retiros/${id}/estado`,
         {
           method: "PATCH",
           headers: getAuthJsonHeaders(),

@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FaTimes, FaClipboardList } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { getAuthJsonHeaders, handleUnauthorized } from "../utils/adminAuth";
+import { API_URL } from "../config/api";
 import "./PlanillaModal.css";
 
 const emptyForm = {
@@ -81,7 +82,7 @@ function PlanillaModal({ open, onClose, initialData, onSaved }) {
         observaciones: formData.observaciones,
       };
 
-      const response = await fetch("http://localhost:3000/api/planillas", {
+      const response = await fetch(`${API_URL}/api/planillas`, {
         method: "POST",
         headers: getAuthJsonHeaders(),
         body: JSON.stringify(payload),

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { API_URL } from "../config/api";
 import logo from "../assets/images/logo_abc.jpeg";
 import "./AdminLogin.css";
 
@@ -31,7 +32,7 @@ const AdminLogin = () => {
     try {
       setCargando(true);
 
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

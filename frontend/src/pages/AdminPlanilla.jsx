@@ -4,6 +4,7 @@ import { FaClipboardList, FaPlus } from "react-icons/fa";
 import PlanillaModal from "../components/PlanillaModal";
 import AdminNav from "../components/admin/AdminNav/AdminNav";
 import { getAuthHeaders, handleUnauthorized } from "../utils/adminAuth";
+import { API_URL } from "../config/api";
 import "./AdminRetiros.css";
 
 const hoy = () => {
@@ -26,7 +27,7 @@ const AdminPlanilla = () => {
     const cargar = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/planillas?fecha=${fecha}`,
+          `${API_URL}/api/planillas?fecha=${fecha}`,
           { headers: getAuthHeaders() }
         );
 
