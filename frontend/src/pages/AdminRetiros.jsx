@@ -3,6 +3,12 @@ import { Container } from "react-bootstrap";
 import { FaSearch, FaClipboardList, FaPlus, FaCheck } from "react-icons/fa";
 import Swal from "sweetalert2";
 import PlanillaModal from "../components/PlanillaModal";
+import AdminNav from "../components/admin/AdminNav/AdminNav";
+import {
+  getAuthHeaders,
+  getAuthJsonHeaders,
+  handleUnauthorized,
+} from "../utils/adminAuth";
 import "./AdminRetiros.css";
 
 const ESTADOS = ["Pendiente", "En proceso", "Retirado", "Entregado"];
@@ -38,7 +44,11 @@ const AdminRetiros = () => {
   useEffect(() => {
     const obtenerRetiros = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/retiros");
+        const response = await fetch("http://localhost:3000/api/retiros", {
+          headers: getAuthHeaders(),
+        });
+
+        if (handleUnauthorized(response)) return;
 
         if (!response.ok) {
           throw new Error("No se pudieron obtener las solicitudes");
@@ -60,7 +70,11 @@ const AdminRetiros = () => {
   useEffect(() => {
     const obtenerPlanillas = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/planillas");
+        const response = await fetch("http://localhost:3000/api/planillas", {
+          headers: getAuthHeaders(),
+        });
+
+        if (handleUnauthorized(response)) return;
         if (!response.ok) return;
 
         const data = await response.json();
@@ -113,10 +127,12 @@ const AdminRetiros = () => {
         `http://localhost:3000/api/retiros/${id}/estado`,
         {
           method: "PATCH",
-          headers: { "Content-Type": "application/json" },
+          headers: getAuthJsonHeaders(),
           body: JSON.stringify({ estado: nuevoEstado }),
         }
       );
+
+      if (handleUnauthorized(response)) return;
 
       if (!response.ok) {
         throw new Error("No se pudo actualizar el estado");
@@ -168,11 +184,13 @@ const AdminRetiros = () => {
   };
 
   return (
-    <section className="section admin">
+    <>
+      <AdminNav />
+      <section className="section admin">
       <Container>
         <header className="admin__header">
           <span className="eyebrow">
-            <FaClipboardList /> Panel administrativo
+            <FaClipboardList /> Solicitudes
           </span>
           <h1 className="admin__title">Solicitudes de retiro</h1>
           {!cargando && !error && (
@@ -327,7 +345,8 @@ const AdminRetiros = () => {
         initialData={datosPlanilla}
         onSaved={handlePlanillaGuardada}
       />
-    </section>
+      </section>
+    </>
   );
 };
 

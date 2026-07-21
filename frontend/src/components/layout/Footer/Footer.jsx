@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import {
   FaWhatsapp,
@@ -84,7 +85,12 @@ function Footer() {
           <span>
             © {year} {siteConfig.legalName}. Todos los derechos reservados.
           </span>
-          <span>Hecho con seguridad en Argentina 🇦🇷</span>
+          <span className="footer__bottom-right">
+            Hecho con seguridad en Argentina 🇦🇷
+            <Link to="/admin/login" className="footer__admin-link">
+              Acceso administrativo
+            </Link>
+          </span>
         </div>
       </Container>
     </footer>

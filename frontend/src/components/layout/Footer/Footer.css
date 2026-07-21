@@ -109,3 +109,22 @@
   font-size: 0.85rem;
   color: #6b7280;
 }
+
+.footer__bottom-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer__admin-link {
+  font-size: 0.78rem;
+  color: #6b7280;
+  opacity: 0.8;
+  transition: color var(--transition), opacity var(--transition);
+}
+
+.footer__admin-link:hover {
+  color: #c8ccd3;
+  opacity: 1;
+}

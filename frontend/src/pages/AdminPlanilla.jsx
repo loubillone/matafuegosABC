@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { FaClipboardList, FaPlus } from "react-icons/fa";
 import PlanillaModal from "../components/PlanillaModal";
+import AdminNav from "../components/admin/AdminNav/AdminNav";
+import { getAuthHeaders, handleUnauthorized } from "../utils/adminAuth";
 import "./AdminRetiros.css";
 
 const hoy = () => {
@@ -24,8 +26,11 @@ const AdminPlanilla = () => {
     const cargar = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/planillas?fecha=${fecha}`
+          `http://localhost:3000/api/planillas?fecha=${fecha}`,
+          { headers: getAuthHeaders() }
         );
+
+        if (handleUnauthorized(response)) return;
 
         if (!response.ok) {
           throw new Error("No se pudo obtener la planilla");
@@ -61,11 +66,13 @@ const AdminPlanilla = () => {
   const abrirManual = () => setModalOpen(true);
 
   return (
-    <section className="section admin">
+    <>
+      <AdminNav />
+      <section className="section admin">
       <Container>
         <header className="admin__header">
           <span className="eyebrow">
-            <FaClipboardList /> Panel administrativo
+            <FaClipboardList /> Planilla diaria
           </span>
           <h1 className="admin__title">Planilla diaria</h1>
           {!cargando && !error && (
@@ -154,7 +161,8 @@ const AdminPlanilla = () => {
         initialData={{ fecha }}
         onSaved={recargarPlanilla}
       />
-    </section>
+      </section>
+    </>
   );
 };
 

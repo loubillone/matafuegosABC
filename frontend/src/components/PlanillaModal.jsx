@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { FaTimes, FaClipboardList } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { getAuthJsonHeaders, handleUnauthorized } from "../utils/adminAuth";
 import "./PlanillaModal.css";
 
 const emptyForm = {
@@ -82,9 +83,11 @@ function PlanillaModal({ open, onClose, initialData, onSaved }) {
 
       const response = await fetch("http://localhost:3000/api/planillas", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthJsonHeaders(),
         body: JSON.stringify(payload),
       });
+
+      if (handleUnauthorized(response)) return;
 
       const data = await response.json().catch(() => ({}));
 

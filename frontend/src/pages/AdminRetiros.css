@@ -1,5 +1,5 @@
 .admin {
-  padding-top: clamp(7rem, 11vw, 9.5rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
   min-height: 70vh;
 }
 
