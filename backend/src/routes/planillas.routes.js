@@ -3,10 +3,11 @@ import {
   crearItemPlanilla,
   obtenerPlanillaPorFecha,
 } from "../controllers/planillas.controller.js";
+import { verificarToken } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.post("/", crearItemPlanilla);
-router.get("/", obtenerPlanillaPorFecha);
+router.post("/", verificarToken, crearItemPlanilla);
+router.get("/", verificarToken, obtenerPlanillaPorFecha);
 
 export default router;

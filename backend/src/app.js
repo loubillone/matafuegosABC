@@ -3,6 +3,7 @@ import cors from "cors";
 import pool from "./config/db.js";
 import retirosRoutes from "./routes/retiros.routes.js";
 import planillasRoutes from "./routes/planillas.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 const app = express();
 
 app.use(cors());
@@ -10,6 +11,7 @@ app.use(express.json());
 
 app.use("/api/retiros", retirosRoutes);
 app.use("/api/planillas", planillasRoutes);
+app.use("/api/auth", authRoutes);
 app.get("/", (req, res) => {
   res.send("API Matafuegos ABC funcionando");
 });
