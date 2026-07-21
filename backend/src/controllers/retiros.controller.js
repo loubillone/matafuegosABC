@@ -1,5 +1,12 @@
 import pool from "../config/db.js";
 
+export const ESTADOS_PERMITIDOS = [
+  "Pendiente",
+  "En proceso",
+  "Retirado",
+  "Entregado",
+];
+
 export const crearRetiro = async (req, res) => {
   try {
     const {
@@ -55,6 +62,43 @@ export const obtenerRetiros = async (req, res) => {
 
     res.status(500).json({
       message: "Error al obtener las solicitudes de retiro",
+    });
+  }
+};
+
+export const actualizarEstadoRetiro = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { estado } = req.body;
+
+    if (!ESTADOS_PERMITIDOS.includes(estado)) {
+      return res.status(400).json({
+        message: "Estado no válido",
+        estadosPermitidos: ESTADOS_PERMITIDOS,
+      });
+    }
+
+    const [resultado] = await pool.query(
+      `UPDATE solicitudes_retiro SET estado = ? WHERE id = ?`,
+      [estado, id],
+    );
+
+    if (resultado.affectedRows === 0) {
+      return res.status(404).json({
+        message: "Solicitud de retiro no encontrada",
+      });
+    }
+
+    res.json({
+      message: "Estado actualizado correctamente",
+      id: Number(id),
+      estado,
+    });
+  } catch (error) {
+    console.error("Error al actualizar estado:", error);
+
+    res.status(500).json({
+      message: "Error al actualizar el estado de la solicitud",
     });
   }
 };
