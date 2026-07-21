@@ -41,3 +41,20 @@ export const crearRetiro = async (req, res) => {
     });
   }
 };
+
+export const obtenerRetiros = async (req, res) => {
+  try {
+    const [retiros] = await pool.query(
+      `SELECT * FROM solicitudes_retiro
+       ORDER BY fecha_solicitud DESC`,
+    );
+
+    res.json(retiros);
+  } catch (error) {
+    console.error("Error al obtener solicitudes:", error);
+
+    res.status(500).json({
+      message: "Error al obtener las solicitudes de retiro",
+    });
+  }
+};
