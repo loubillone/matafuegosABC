@@ -17,6 +17,19 @@ export const crearItemPlanilla = async (req, res) => {
       observaciones,
     } = req.body;
 
+    if (hora && String(hora).trim() !== "") {
+      const [existentes] = await pool.query(
+        `SELECT id FROM planilla_diaria WHERE fecha = ? AND hora = ? LIMIT 1`,
+        [fecha, hora],
+      );
+
+      if (existentes.length > 0) {
+        return res.status(409).json({
+          message: "Ya existe una tarea programada para esa fecha y hora",
+        });
+      }
+    }
+
     const [resultado] = await pool.query(
       `INSERT INTO planilla_diaria
       (

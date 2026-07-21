@@ -218,6 +218,112 @@
   border-color: rgba(31, 161, 90, 0.3);
 }
 
+/* Toolbar (planilla) */
+.admin__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+}
+
+.admin__toolbar .admin__filter input[type="date"] {
+  font-family: var(--font-body);
+  font-size: 0.94rem;
+  color: var(--color-ink);
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.9rem;
+  cursor: pointer;
+}
+
+.admin__toolbar .admin__filter input[type="date"]:focus {
+  outline: none;
+  border-color: var(--color-fire);
+  box-shadow: 0 0 0 3px rgba(237, 28, 36, 0.14);
+}
+
+.admin__add {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Badge Cobrar */
+.admin__cobrar {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+}
+
+.admin__cobrar--si {
+  background: var(--color-fire-soft);
+  color: var(--color-fire-dark);
+}
+
+.admin__cobrar--no {
+  background: var(--color-bg-soft);
+  color: var(--color-slate);
+}
+
+.admin__obs {
+  max-width: 260px;
+  white-space: normal;
+  color: var(--color-slate);
+  font-size: 0.9rem;
+}
+
+/* Acción "Agregar a planilla" */
+.admin__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-line);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition),
+    background-color var(--transition), transform var(--transition);
+}
+
+.admin__action:hover {
+  border-color: var(--color-fire);
+  color: var(--color-fire);
+  transform: translateY(-1px);
+}
+
+.admin__action svg {
+  font-size: 0.78rem;
+}
+
+.admin__action--done {
+  border-color: transparent;
+  background: var(--color-safe-soft);
+  color: var(--color-safe);
+  cursor: default;
+}
+
+.admin__action--done:hover {
+  transform: none;
+}
+
 @media (max-width: 575px) {
   .admin__filter {
     flex: 1 1 100%;

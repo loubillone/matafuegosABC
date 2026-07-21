@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { Container } from "react-bootstrap";
-import { FaSearch, FaClipboardList } from "react-icons/fa";
+import { FaSearch, FaClipboardList, FaPlus, FaCheck } from "react-icons/fa";
 import Swal from "sweetalert2";
+import PlanillaModal from "../components/PlanillaModal";
 import "./AdminRetiros.css";
 
 const ESTADOS = ["Pendiente", "En proceso", "Retirado", "Entregado"];
@@ -30,6 +31,10 @@ const AdminRetiros = () => {
   const [filtroEstado, setFiltroEstado] = useState("Todos");
   const [filtroLocalidad, setFiltroLocalidad] = useState("Todas");
 
+  const [agregadas, setAgregadas] = useState(() => new Set());
+  const [modalOpen, setModalOpen] = useState(false);
+  const [datosPlanilla, setDatosPlanilla] = useState(null);
+
   useEffect(() => {
     const obtenerRetiros = async () => {
       try {
@@ -50,6 +55,25 @@ const AdminRetiros = () => {
     };
 
     obtenerRetiros();
+  }, []);
+
+  useEffect(() => {
+    const obtenerPlanillas = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/planillas");
+        if (!response.ok) return;
+
+        const data = await response.json();
+        const ids = data
+          .map((item) => item.solicitud_id)
+          .filter((id) => id !== null && id !== undefined);
+        setAgregadas(new Set(ids));
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    obtenerPlanillas();
   }, []);
 
   const localidades = useMemo(() => {
@@ -119,6 +143,27 @@ const AdminRetiros = () => {
         confirmButtonText: "Aceptar",
         confirmButtonColor: "#ed1c24",
       });
+    }
+  };
+
+  const abrirPlanilla = (retiro) => {
+    setDatosPlanilla({
+      solicitud_id: retiro.id,
+      cliente: retiro.empresa || "",
+      direccion: retiro.direccion || "",
+      contacto: retiro.encargado || "",
+      telefono: retiro.telefono || "",
+      retirar: retiro.cantidad ?? 0,
+      entregar: 0,
+      cobrar: false,
+      observaciones: retiro.observaciones || "",
+    });
+    setModalOpen(true);
+  };
+
+  const handlePlanillaGuardada = (payload) => {
+    if (payload?.solicitud_id) {
+      setAgregadas((prev) => new Set(prev).add(payload.solicitud_id));
     }
   };
 
@@ -209,6 +254,7 @@ const AdminRetiros = () => {
                       <th>Localidad</th>
                       <th>Estado</th>
                       <th>Fecha</th>
+                      <th>Acciones</th>
                     </tr>
                   </thead>
 
@@ -240,10 +286,30 @@ const AdminRetiros = () => {
                         </td>
                         <td className="admin__date">
                           {retiro.fecha_solicitud
-                            ? new Date(retiro.fecha_solicitud).toLocaleString(
-                                "es-AR"
+                            ? new Date(retiro.fecha_solicitud).toLocaleDateString(
+                                "es-AR",
+                                {
+                                  day: "2-digit",
+                                  month: "2-digit",
+                                  year: "numeric",
+                                }
                               )
                             : "-"}
+                        </td>
+                        <td>
+                          {agregadas.has(retiro.id) ? (
+                            <span className="admin__action admin__action--done">
+                              <FaCheck /> Ya agregada
+                            </span>
+                          ) : (
+                            <button
+                              type="button"
+                              className="admin__action"
+                              onClick={() => abrirPlanilla(retiro)}
+                            >
+                              <FaPlus /> Agregar a planilla
+                            </button>
+                          )}
                         </td>
                       </tr>
                     ))}
@@ -254,6 +320,13 @@ const AdminRetiros = () => {
           </>
         )}
       </Container>
+
+      <PlanillaModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        initialData={datosPlanilla}
+        onSaved={handlePlanillaGuardada}
+      />
     </section>
   );
 };

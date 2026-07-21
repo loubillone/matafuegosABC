@@ -5,6 +5,7 @@ import WhatsAppFloat from "./components/layout/WhatsAppFloat/WhatsAppFloat";
 import RetiroProvider from "./context/RetiroProvider";
 import Home from "./pages/Home";
 import AdminRetiros from "./pages/AdminRetiros.jsx";
+import AdminPlanilla from "./pages/AdminPlanilla.jsx";
 import Products from "./pages/Products";
 import ProductCategory from "./pages/ProductCategory";
 
@@ -19,6 +20,7 @@ function App() {
             <Route path="/productos" element={<Products />} />
             <Route path="/productos/:slug" element={<ProductCategory />} />
             <Route path="/admin/retiros" element={<AdminRetiros />} />
+            <Route path="/admin/planilla" element={<AdminPlanilla />} />
           </Routes>
         </main>
         <Footer />
